@@ -1,3 +1,4 @@
+
 import time
 import subprocess
 from watchdog.observers import Observer
@@ -5,10 +6,14 @@ from watchdog.events import FileSystemEventHandler
 
 class AutoPush(FileSystemEventHandler):
     def on_modified(self, event):
-        if event.src_path.endswith(".py") and "auto_push" not in event.src_path:
+        if ".git" in event.src_path or "auto_push" in event.src_path:
+            return
+        if event.src_path.endswith(".py"):
             push(event.src_path)
 
     def on_created(self, event):
+        if ".git" in event.src_path or "auto_push" in event.src_path:
+            return
         push(event.src_path)
 
 def push(path):
