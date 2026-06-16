@@ -5,4 +5,4 @@ x=input("What's your name? ")
 print("I am",x)
 
 
-print("Hlo",input())
+print("Input function inside print function",input("Enter details to show"))
